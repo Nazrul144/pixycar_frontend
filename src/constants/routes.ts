@@ -1,5 +1,6 @@
 export const ROUTES = {
   home: "/",
+  browse: "/browse",
   auth: {
     signIn: "/sign-in",
     signUp: "/sign-up",

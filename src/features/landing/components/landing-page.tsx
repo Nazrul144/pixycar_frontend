@@ -1,17 +1,19 @@
-import { HeroSection } from "./hero-section";
-import { HowItWorksSection } from "./how-it-works-section";
-import { FeaturesSection } from "./features-section";
-import { TestimonialsSection } from "./testimonials-section";
-import { CtaSection } from "./cta-section";
+import { HeroSection } from "@/components/layout/hero-section";
+import { HowItWorks } from "@/components/(marketing)/how-it-works";
+import { Features } from "@/components/(marketing)/features";
+import { LiveListings } from "@/components/(marketing)/live-listings";
+import { Testimonials } from "@/components/(marketing)/testimonials";
+import { CTA } from "@/components/(marketing)/cta";
 
 export function LandingPage() {
   return (
     <>
       <HeroSection />
-      <HowItWorksSection id="how-it-works" />
-      <FeaturesSection id="features" />
-      <TestimonialsSection id="testimonials" />
-      <CtaSection />
+      <HowItWorks id="how-it-works" />
+      <Features id="features" />
+      <LiveListings />
+      <Testimonials id="testimonials" />
+      <CTA />
     </>
   );
 }
