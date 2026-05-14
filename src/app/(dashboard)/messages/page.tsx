@@ -1,5 +1,6 @@
-import { MessagesView } from "@/features/messages/components/messages-view";
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
 
-export default function MessagesPage() {
-  return <MessagesView />;
+export default function LegacyMessagesRedirect() {
+  redirect(ROUTES.seller.messages);
 }

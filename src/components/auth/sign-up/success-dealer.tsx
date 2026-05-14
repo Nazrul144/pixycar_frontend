@@ -29,7 +29,7 @@ export function SuccessDealer() {
         </p>
         <button
           type="button"
-          onClick={() => router.push(ROUTES.dashboard.home)}
+          onClick={() => router.push(ROUTES.dealer.dashboard)}
           className={cn(
             "mt-8 w-full cursor-pointer rounded-xl bg-[#FFA51F] py-3 font-navbar text-base font-semibold text-black",
             "transition-opacity hover:opacity-90"

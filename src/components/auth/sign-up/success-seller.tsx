@@ -23,7 +23,7 @@ export function SuccessSeller() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
-            onClick={() => router.push(ROUTES.dashboard.home)}
+            onClick={() => router.push(ROUTES.seller.dashboard)}
             className={cn(
               "flex-1 cursor-pointer rounded-xl border border-[#FFA51F] bg-white py-3 font-navbar text-base font-semibold text-[#FFA51F]",
               "transition-colors hover:bg-[#FFA51F]/10"
@@ -33,7 +33,7 @@ export function SuccessSeller() {
           </button>
           <button
             type="button"
-            onClick={() => router.push(ROUTES.dashboard.listCar)}
+            onClick={() => router.push(ROUTES.seller.listCar)}
             className={cn(
               "flex-1 cursor-pointer rounded-xl bg-[#FFA51F] py-3 font-navbar text-base font-semibold text-black",
               "transition-opacity hover:opacity-90"

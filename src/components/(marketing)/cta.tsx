@@ -15,7 +15,7 @@ export function CTA() {
 
         <div className="mt-10 flex w-full max-w-2xl flex-col gap-4 sm:flex-row sm:justify-center">
           <Link
-            href={ROUTES.dashboard.listCar}
+            href={ROUTES.seller.listCar}
             className={cn(
               "flex w-full items-center justify-center rounded-xl bg-[#FFA51F] px-10 py-4",
               "font-hero-heading text-base font-semibold text-black transition-opacity hover:opacity-90",

@@ -1,5 +1,6 @@
-import { ProfileView } from "@/features/profile/components/profile-view";
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
 
-export default function ProfilePage() {
-  return <ProfileView />;
+export default function LegacyProfileRedirect() {
+  redirect(ROUTES.seller.profile);
 }

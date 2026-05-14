@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 function hashSubscribe(onStoreChange: () => void) {
   if (typeof window === "undefined") {
-    return () => {};
+    return () => { };
   }
   const handler = () => onStoreChange();
   window.addEventListener("hashchange", handler);
@@ -112,9 +112,9 @@ export function Navbar() {
             <Image
               src="/pixycar-logo.png"
               alt="PixyCar"
-              width={160}
-              height={68}
-              className="h-8 w-auto"
+              width={140}   // w-32 = 128px
+              height={100}   // h-24 = 96px
+              className="object-contain"
               priority
             />
           </Link>

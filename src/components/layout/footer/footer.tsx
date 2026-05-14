@@ -19,11 +19,11 @@ const linkClass = cn(
 
 export function Footer() {
   return (
-    <footer className="w-full bg-[#FFA51F] py-8 px-4 sm:px-8 md:px-16">
+    <footer className="w-full bg-[#FFA51F] px-6 py-12 sm:px-10 sm:py-14 md:px-16 md:py-16">
       <div
         className={cn(
-          "mx-auto flex w-full max-w-screen-2xl flex-col items-center gap-8 text-center",
-          "lg:flex-row lg:items-center lg:justify-between lg:text-left"
+          "mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-10 text-center",
+          "sm:flex-row sm:items-center sm:justify-between sm:gap-12 sm:text-left"
         )}
       >
         <div className="shrink-0">
@@ -34,23 +34,22 @@ export function Footer() {
           >
             <Image
               src="/pixycar-logo.png"
-              alt=""
-              width={160}
-              height={68}
-              className="h-10 w-auto sm:h-11"
-              priority={false}
+              alt="PixyCar"
+              width={140}   // w-32 = 128px
+              height={100}   // h-24 = 96px
+              className="object-contain"
+              priority
             />
           </Link>
         </div>
 
         <div
           className={cn(
-            "flex flex-col items-center gap-8 sm:flex-row sm:gap-12 md:gap-16",
-            "lg:items-start"
+            "flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:gap-10 sm:text-left md:gap-14"
           )}
         >
           <nav
-            className="flex flex-col items-center gap-3 text-center lg:items-start lg:text-left"
+            className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left"
             aria-label="Legal"
           >
             {LEGAL_LINKS.map((item) => (
@@ -61,7 +60,7 @@ export function Footer() {
           </nav>
 
           <nav
-            className="flex flex-col items-center gap-3 text-center lg:items-start lg:text-left"
+            className="flex flex-col items-center gap-3 text-center sm:items-start sm:text-left"
             aria-label="Help"
           >
             {HELP_LINKS.map((item) => (

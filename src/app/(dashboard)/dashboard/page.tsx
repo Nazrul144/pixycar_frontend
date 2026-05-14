@@ -1,5 +1,6 @@
-import { DashboardView } from "@/features/dashboard/components/dashboard-view";
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
 
-export default function DashboardPage() {
-  return <DashboardView />;
+export default function LegacyDashboardRedirect() {
+  redirect(ROUTES.seller.dashboard);
 }

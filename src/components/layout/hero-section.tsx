@@ -53,7 +53,7 @@ export function HeroSection() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <Link
-              href={ROUTES.dashboard.listCar}
+              href={ROUTES.seller.listCar}
               className={cn(
                 "inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-normal sm:text-base",
                 "bg-[#FFA51F] text-black transition-opacity hover:opacity-90"

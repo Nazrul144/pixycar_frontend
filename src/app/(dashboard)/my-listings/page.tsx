@@ -1,5 +1,6 @@
-import { MyListingsView } from "@/features/listings/components/my-listings-view";
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
 
-export default function MyListingsPage() {
-  return <MyListingsView />;
+export default function LegacyMyListingsRedirect() {
+  redirect(ROUTES.seller.myListings);
 }
