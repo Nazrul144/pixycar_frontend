@@ -112,7 +112,7 @@ export function HowItWorks({ id }: HowItWorksProps) {
   return (
     <section
       id={id}
-      className="bg-white py-16 font-navbar sm:py-20 lg:py-24"
+      className="scroll-mt-24 bg-white py-16 font-navbar sm:py-20 lg:py-24"
     >
       <div className="mx-auto w-full max-w-screen-2xl px-3 sm:px-4 lg:px-6">
         <div className="flex flex-col items-center text-center">

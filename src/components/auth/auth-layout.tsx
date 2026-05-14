@@ -19,14 +19,15 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
         <div className="absolute inset-0 bg-black/50" aria-hidden />
         <div className="relative z-10 flex min-h-dvh flex-col p-8 text-white lg:p-10">
           <Link href={ROUTES.home} className="inline-flex shrink-0 cursor-pointer self-start">
-            <Image
+            {/* <Image
               src="/pixycar-logo.png"
               alt="PixyCar"
-              width={160}
-              height={68}
+              width={260}
+              height={200}
               className="h-9 w-auto brightness-0 invert"
               priority
-            />
+            /> */}
+            <span className="font-hero-heading text-3xl font-bold tracking-tight">PixyCar</span>
           </Link>
           <div className="flex flex-1 flex-col justify-center py-10">
             <h1 className="font-hero-heading text-3xl font-bold leading-tight tracking-tight lg:text-4xl">

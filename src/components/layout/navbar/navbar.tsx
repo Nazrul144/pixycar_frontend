@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useState, useSyncExternalStore } from "react";
+import { useEffect, useId, useState, useSyncExternalStore, type MouseEvent } from "react";
 import { MARKETING_NAV_LINKS } from "@/constants/nav.constants";
 import { ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
@@ -57,6 +57,31 @@ function isNavLinkActive(
   }
 
   return pathname === href;
+}
+
+/** Same-page home sections: smooth scroll + hash without full Next remount. */
+function handleMarketingHashClick(
+  e: MouseEvent<HTMLAnchorElement>,
+  pathname: string | null,
+  href: string
+) {
+  if (!href.startsWith("/#")) return;
+  const id = href.slice("/#".length);
+  if (!id) return;
+
+  const onHome = pathname === "/" || pathname === "";
+  if (!onHome) return;
+
+  e.preventDefault();
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.getElementById(id)?.scrollIntoView({
+    behavior: prefersReducedMotion ? "auto" : "smooth",
+    block: "start",
+  });
+  window.history.replaceState(null, "", href);
+  window.dispatchEvent(new Event("hashchange"));
 }
 
 export function Navbar() {
@@ -125,7 +150,12 @@ export function Navbar() {
           aria-label="Primary"
         >
           {MARKETING_NAV_LINKS.map((item) => (
-            <Link key={item.href} href={item.href} className={linkClass(item.href)}>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={linkClass(item.href)}
+              onClick={(e) => handleMarketingHashClick(e, pathname, item.href)}
+            >
               {item.label}
             </Link>
           ))}
@@ -214,7 +244,10 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(linkClass(item.href), "rounded-md px-3 py-3")}
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => {
+                  setMobileOpen(false);
+                  handleMarketingHashClick(e, pathname, item.href);
+                }}
               >
                 {item.label}
               </Link>

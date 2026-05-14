@@ -106,7 +106,7 @@ export default function SignUpPage() {
             setShowTermsModal(false);
             setShowPrivacyModal(true);
           }}
-          onRequestTermsBeforeComplete={beginSignUpTermsGate}
+          onSignUpComplete={() => setStep(3)}
         />
       )}
 

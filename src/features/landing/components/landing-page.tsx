@@ -11,7 +11,7 @@ export function LandingPage() {
       <HeroSection />
       <HowItWorks id="how-it-works" />
       <Features id="features" />
-      <LiveListings />
+      <LiveListings id="browse-cars" />
       <Testimonials id="testimonials" />
       <CTA />
     </>

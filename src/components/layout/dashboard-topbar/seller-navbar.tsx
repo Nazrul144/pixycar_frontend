@@ -67,9 +67,9 @@ export function SellerNavbar() {
             <Image
               src="/pixycar-logo.png"
               alt="PixyCar"
-              width={140}
-              height={60}
-              className="h-8 w-auto sm:h-9"
+              width={140}   // w-32 = 128px
+              height={100}   // h-24 = 96px
+              className="object-contain"
               priority
             />
           </Link>

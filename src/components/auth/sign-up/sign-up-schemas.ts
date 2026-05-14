@@ -108,6 +108,14 @@ export const dealerSignUpSchema = z
     agreed: z.boolean(),
   })
   .superRefine((data, ctx) => {
+    if (!data.agreed) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          "Please check the box to confirm you agree to the Terms of Service and Privacy Policy before signing up.",
+        path: ["agreed"],
+      });
+    }
     if (data.confirmPassword.length > 0 && data.password !== data.confirmPassword) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

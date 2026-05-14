@@ -17,8 +17,8 @@ type DealerFormProps = {
   registerAgreementSetter: RegisterAgreementSetter;
   onOpenTerms: () => void;
   onOpenPrivacy: () => void;
-  /** Called after all fields validate; parent opens Terms modal then advances on Confirm. */
-  onRequestTermsBeforeComplete: () => void;
+  /** Called after the form validates (including agreement checkbox); advances without opening the terms modal. */
+  onSignUpComplete: () => void;
 };
 
 const inputBase = cn(
@@ -40,7 +40,7 @@ export function DealerForm({
   registerAgreementSetter,
   onOpenTerms,
   onOpenPrivacy,
-  onRequestTermsBeforeComplete,
+  onSignUpComplete,
 }: DealerFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -77,7 +77,6 @@ export function DealerForm({
     };
   }, [registerAgreementSetter, setValue]);
 
-  const agreed = useWatch({ control, name: "agreed", defaultValue: false });
   const passwordValue = useWatch({ control, name: "password", defaultValue: "" });
   const confirmValue = useWatch({ control, name: "confirmPassword", defaultValue: "" });
 
@@ -92,7 +91,7 @@ export function DealerForm({
     }
     setConfirmSubmitMessage("");
     console.log("dealer-sign-up", data);
-    onRequestTermsBeforeComplete();
+    onSignUpComplete();
   };
 
   return (
@@ -257,42 +256,48 @@ export function DealerForm({
             </div>
           </div>
 
-          <div className="flex items-start gap-2 pt-1">
-            <input
-              type="checkbox"
-              id="dealer-agreed"
-              className="mt-1 size-4 shrink-0 rounded border-[#E5E7EB] text-[#FFA51F] focus:ring-[#FFA51F]"
-              checked={agreed}
-              onChange={(e) =>
-                setValue("agreed", e.target.checked, {
-                  shouldDirty: true,
-                  shouldValidate: true,
-                })
-              }
-            />
-            <div className="min-w-0 flex-1">
-              <label
-                htmlFor="dealer-agreed"
-                className="font-navbar text-sm leading-relaxed text-[#5E5E5E] sm:text-base"
-              >
-                I agree to the{" "}
-                <button
-                  type="button"
-                  onClick={onOpenTerms}
-                  className="cursor-pointer font-medium text-[#8F4A00] hover:underline"
+          <div className="flex flex-col gap-1 pt-1">
+            <div className="flex items-start gap-2">
+              <input
+                type="checkbox"
+                id="dealer-agreed"
+                className={cn(
+                  "mt-1 size-4 shrink-0 rounded border-[#E5E7EB] text-[#FFA51F] focus:ring-[#FFA51F]",
+                  errors.agreed && "border-red-500"
+                )}
+                {...register("agreed")}
+              />
+              <div className="min-w-0 flex-1">
+                <label
+                  htmlFor="dealer-agreed"
+                  className="font-navbar text-sm leading-relaxed text-[#5E5E5E] sm:text-base"
                 >
-                  Terms of Service
-                </button>{" "}
-                and{" "}
-                <button
-                  type="button"
-                  onClick={onOpenPrivacy}
-                  className="cursor-pointer font-medium text-[#8F4A00] hover:underline"
-                >
-                  Privacy Policy
-                </button>
-              </label>
+                  I agree to the{" "}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onOpenTerms();
+                    }}
+                    className="cursor-pointer font-medium text-[#8F4A00] hover:underline"
+                  >
+                    Terms of Service
+                  </button>{" "}
+                  and{" "}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onOpenPrivacy();
+                    }}
+                    className="cursor-pointer font-medium text-[#8F4A00] hover:underline"
+                  >
+                    Privacy Policy
+                  </button>
+                </label>
+              </div>
             </div>
+            <FieldError message={errors.agreed?.message} />
           </div>
 
           <button
