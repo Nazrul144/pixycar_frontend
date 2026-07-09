@@ -17,8 +17,10 @@ type SellerFormProps = {
   registerAgreementSetter: RegisterAgreementSetter;
   onOpenTerms: () => void;
   onOpenPrivacy: () => void;
-  /** Called after all fields validate; parent opens Terms modal then advances on Confirm. */
-  onRequestTermsBeforeComplete: () => void;
+  /** Receives the validated form data; parent opens Terms modal then calls the API on Confirm. */
+  onRequestTermsBeforeComplete: (data: SellerSignUpInput) => void;
+  /** Whether the parent is currently loading (API in-flight). Disables submit button. */
+  isLoading?: boolean;
 };
 
 const inputBase = cn(
@@ -41,6 +43,7 @@ export function SellerForm({
   onOpenTerms,
   onOpenPrivacy,
   onRequestTermsBeforeComplete,
+  isLoading = false,
 }: SellerFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -90,8 +93,7 @@ export function SellerForm({
       return;
     }
     setConfirmSubmitMessage("");
-    console.log("seller-sign-up", data);
-    onRequestTermsBeforeComplete();
+    onRequestTermsBeforeComplete(data);
   };
 
   return (
@@ -282,12 +284,14 @@ export function SellerForm({
 
           <button
             type="submit"
+            disabled={isLoading}
             className={cn(
               "mt-2 w-full cursor-pointer rounded-xl bg-[#FFA51F] py-3 font-navbar text-base font-semibold text-black",
-              "transition-opacity hover:opacity-90"
+              "transition-opacity hover:opacity-90",
+              isLoading && "cursor-not-allowed opacity-60"
             )}
           >
-            Sign Up
+            {isLoading ? "Creating Account…" : "Sign Up"}
           </button>
         </form>
 

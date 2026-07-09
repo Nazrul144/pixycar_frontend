@@ -127,10 +127,10 @@ export function UploadPhotos({ initial, onBack, onContinue }: UploadPhotosProps)
         return;
       }
     }
-    if (!video) {
-      setError("Please upload the entire car video.");
-      return;
-    }
+    // if (!video) {
+    //   setError("Please upload the entire car video.");
+    //   return;
+    // }
     if (totalCount > 15) {
       setError("Maximum 15 files total (including required photos and extras).");
       return;
@@ -241,7 +241,7 @@ export function UploadPhotos({ initial, onBack, onContinue }: UploadPhotosProps)
         </div>
 
         <div>
-          <h2 className="font-navbar text-sm font-semibold text-[#1E1E1E] sm:text-base">Entire Car Video*</h2>
+          <h2 className="font-navbar text-sm font-semibold text-[#1E1E1E] sm:text-base">Entire Car Video</h2>
           <div className="mt-3 max-w-md">
             <div className="flex min-h-[100px] flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-neutral-50/80 p-4">
               {videoPreview ? (

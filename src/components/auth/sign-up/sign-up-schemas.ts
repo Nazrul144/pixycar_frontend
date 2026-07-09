@@ -1,11 +1,10 @@
 import { z } from "zod";
 
-/** Standard strength: 8–128 chars, upper, lower, number, special. */
+/** Standard strength: 8–128 chars, lower, number, special. */
 export const signupPasswordSchema = z
   .string()
   .min(8, "Password must be at least 8 characters")
   .max(128, "Password must be at most 128 characters")
-  .regex(/[A-Z]/, "Password must include an uppercase letter")
   .regex(/[a-z]/, "Password must include a lowercase letter")
   .regex(/[0-9]/, "Password must include a number")
   .regex(/[^A-Za-z0-9]/, "Password must include a special character");
@@ -14,7 +13,6 @@ export const signupPasswordSchema = z
 export type SignupPasswordChecks = {
   minLen: boolean;
   maxLen: boolean;
-  upper: boolean;
   lower: boolean;
   digit: boolean;
   special: boolean;
@@ -24,7 +22,6 @@ export function getSignupPasswordChecks(password: string): SignupPasswordChecks 
   return {
     minLen: password.length >= 8,
     maxLen: password.length <= 128,
-    upper: /[A-Z]/.test(password),
     lower: /[a-z]/.test(password),
     digit: /[0-9]/.test(password),
     special: /[^A-Za-z0-9]/.test(password),
@@ -33,7 +30,7 @@ export function getSignupPasswordChecks(password: string): SignupPasswordChecks 
 
 export function isSignupPasswordStrong(password: string): boolean {
   const c = getSignupPasswordChecks(password);
-  return c.minLen && c.maxLen && c.upper && c.lower && c.digit && c.special;
+  return c.minLen && c.maxLen && c.lower && c.digit && c.special;
 }
 
 export const sellerSignUpSchema = z

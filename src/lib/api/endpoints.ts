@@ -2,8 +2,10 @@ export const ENDPOINTS = {
   auth: {
     signIn: "/auth/sign-in",
     signUp: "/auth/sign-up",
+    registerSeller: "/accounts/register/seller/",
+    registerDealer: "/accounts/register/dealer/",
     forgotPassword: "/auth/forgot-password",
-    verifyOtp: "/auth/verify-otp",
+    verifyOtp: "/accounts/verify-otp/",
     resetPassword: "/auth/reset-password",
   },
   listings: {

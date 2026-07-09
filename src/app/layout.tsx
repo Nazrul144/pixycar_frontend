@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
+import ScrollToTopButton from "@/components/ButtomToTopScrolling/ScrollToTopButton";
+import { Providers } from "@/providers";
+import Script from "next/script";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,7 +36,11 @@ export default function RootLayout({
       className={`${poppins.variable} ${montserrat.variable}`}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        <Script src="http://13.61.225.84:3000/widget.js" data-slug="elite-plumbing-pro" strategy="afterInteractive" />
+        <Providers>{children}</Providers>
+        <ScrollToTopButton />
+      </body>
     </html>
   );
 }

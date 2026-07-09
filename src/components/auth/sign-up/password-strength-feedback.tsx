@@ -8,11 +8,10 @@ type PasswordStrengthFeedbackProps = {
 
 const CHECK_ORDER: { key: keyof Pick<
   SignupPasswordChecks,
-  "minLen" | "lower" | "upper" | "digit" | "special"
+  "minLen" | "lower" | "digit" | "special"
 >; label: string }[] = [
   { key: "minLen", label: "At least 8 characters" },
   { key: "lower", label: "One lowercase letter" },
-  { key: "upper", label: "One uppercase letter" },
   { key: "digit", label: "One number" },
   { key: "special", label: "One special character" },
 ];
@@ -20,12 +19,12 @@ const CHECK_ORDER: { key: keyof Pick<
 type StrengthTier = "toolong" | "weak" | "medium" | "good" | "strong";
 
 function getTier(checks: SignupPasswordChecks, metCount: number): StrengthTier {
-  if (checks.minLen && checks.lower && checks.upper && checks.digit && checks.special && !checks.maxLen) {
+  if (checks.minLen && checks.lower && checks.digit && checks.special && !checks.maxLen) {
     return "toolong";
   }
-  if (metCount >= 5 && checks.maxLen) return "strong";
-  if (metCount === 4 && checks.maxLen) return "good";
-  if (metCount === 3) return "medium";
+  if (metCount >= 4 && checks.maxLen) return "strong";
+  if (metCount === 3 && checks.maxLen) return "good";
+  if (metCount === 2) return "medium";
   return "weak";
 }
 

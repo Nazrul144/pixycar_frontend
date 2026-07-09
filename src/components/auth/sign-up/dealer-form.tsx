@@ -17,8 +17,9 @@ type DealerFormProps = {
   registerAgreementSetter: RegisterAgreementSetter;
   onOpenTerms: () => void;
   onOpenPrivacy: () => void;
-  /** Called after the form validates (including agreement checkbox); advances without opening the terms modal. */
-  onSignUpComplete: () => void;
+  /** Receives the validated form data; parent opens Terms modal then calls the API on Confirm. */
+  onSignUpComplete: (data: DealerSignUpInput) => void;
+  isLoading?: boolean;
 };
 
 const inputBase = cn(
@@ -41,6 +42,7 @@ export function DealerForm({
   onOpenTerms,
   onOpenPrivacy,
   onSignUpComplete,
+  isLoading = false,
 }: DealerFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -91,7 +93,7 @@ export function DealerForm({
     }
     setConfirmSubmitMessage("");
     console.log("dealer-sign-up", data);
-    onSignUpComplete();
+    onSignUpComplete(data);
   };
 
   return (
@@ -302,12 +304,14 @@ export function DealerForm({
 
           <button
             type="submit"
+            disabled={isLoading}
             className={cn(
               "mt-2 w-full cursor-pointer rounded-xl bg-[#FFA51F] py-3 font-navbar text-base font-semibold text-black",
-              "transition-opacity hover:opacity-90"
+              "transition-opacity hover:opacity-90",
+              isLoading && "cursor-not-allowed opacity-60"
             )}
           >
-            Sign Up
+            {isLoading ? "Creating Account…" : "Sign Up"}
           </button>
         </form>
 

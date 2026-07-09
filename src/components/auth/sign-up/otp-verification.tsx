@@ -12,6 +12,9 @@ import {
 
 type OtpVerificationProps = {
   onContinue: (code: string) => void;
+  /** Email address that was registered; displayed in the description. */
+  email?: string;
+  isLoading?: boolean;
 };
 
 const digitInputBase = cn(
@@ -20,7 +23,7 @@ const digitInputBase = cn(
   "focus:ring-2"
 );
 
-export function OtpVerification({ onContinue }: OtpVerificationProps) {
+export function OtpVerification({ onContinue, email, isLoading }: OtpVerificationProps) {
   const [digits, setDigits] = useState(["", "", "", "", "", ""]);
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -94,8 +97,13 @@ export function OtpVerification({ onContinue }: OtpVerificationProps) {
           Verification
         </h2>
         <p className="mt-3 text-center font-navbar text-sm font-normal leading-relaxed text-[#5E5E5E] sm:text-base">
-          Enter the OTP sent to your email to verify your identity. Once verified,
-          you can proceed to sign Up
+          Enter the OTP sent to{" "}
+          {email ? (
+            <span className="font-semibold text-[#1E1E1E]">{email}</span>
+          ) : (
+            "your email"
+          )}{" "}
+          to verify your identity. Once verified, you can proceed to sign Up
         </p>
 
         <form onSubmit={handleSubmit(onValid)} className="mt-8">
@@ -142,12 +150,13 @@ export function OtpVerification({ onContinue }: OtpVerificationProps) {
 
           <button
             type="submit"
+            disabled={isLoading}
             className={cn(
               "mt-8 w-full cursor-pointer rounded-xl bg-[#FFA51F] py-3 font-navbar text-base font-semibold text-black",
-              "transition-opacity hover:opacity-90"
+              "transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
             )}
           >
-            Continue
+            {isLoading ? "Verifying..." : "Continue"}
           </button>
         </form>
       </div>
